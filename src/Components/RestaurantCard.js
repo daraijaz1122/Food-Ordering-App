@@ -6,7 +6,7 @@ const RestaurantCard =(props)=>{
         name,
         cuisines,
         avgRating,
-        deliveryTime}=resData?.data;
+        deliveryTime}=resData?.info;
         const styleCard={
             backgroundColor:"#f0f0f0"
           }

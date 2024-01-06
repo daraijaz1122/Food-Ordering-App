@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "R",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -12,14 +13,18 @@
   "author": "aijaz",
   "license": "ISC",
   "dependencies": {
+    "lucide-react": "^0.303.0",
     "parcel": "^2.10.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
-    "process": "^0.11.10"
+    "postcss": "^8.4.33",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.1"
   },
-  "browserlist":[
+  "browserlist": [
     "last 2 chrome version"
   ]
 }

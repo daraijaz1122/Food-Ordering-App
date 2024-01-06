@@ -2,18 +2,20 @@ import { resList } from "../utils/ApiData";
 import RestaurantCard from "./RestaurantCard";
 import {useState,useEffect} from 'react';
 import ShimmerUI from "./ShimmerUI";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Body =()=>{
   const [listOfRestaurants,setlistOfRestaurants] = useState([])
   const [searchText , SetSearchText] = useState("");
   const[filteredRes,setfilteredRes] = useState([])
 
-    useEffect(()=>{
-      fetchdata()
-    },[])
+  useEffect(()=>{
+    fetchdata();
+  },[])
 
   const fetchdata = async()=>{
     const data = await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=26.913903&lng=80.943945"
+      "https://www.swiggy.com/mapi/homepage/getCards?lat=26.913903&lng=80.943945",
     );
     const json = await data.json();
     const resData = json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
@@ -35,23 +37,27 @@ const filteredRestaurants = listOfRestaurants.filter(
     );
     setfilteredRes(filteredList)
   }
-
+ const onlineStatus = useOnlineStatus();
+ if(onlineStatus===false)return <h1>Check you status you are offline</h1>
   //conditional rendering...............
-    return listOfRestaurants.length === 0 ? <ShimmerUI/> :( 
-      <div className='body'>
-        <div className="search-container">
-          <div className='search'>
-          <button
-          onClick={handleSearch}
-          >Search</button>
-          <input 
-          className="input-box" 
-          type="text" placeholder="Search "
-          value ={searchText}
-          onChange={(e)=>{
-            SetSearchText(e.target.value);
-          }}
-          />
+//if(listOfRestaurants.length===0)return<ShimmerUI/>
+
+
+    return listOfRestaurants.length === 0 ?(<ShimmerUI/>): ( 
+         <div className=''>
+            <div className="search-container">
+              <div className='search'>
+              <button
+              onClick={handleSearch}
+              >Search</button>
+              <input 
+              className="input-box" 
+              type="text" placeholder="Search "
+              value ={searchText}
+              onChange={(e)=>{
+                SetSearchText(e.target.value);
+              }}
+              />
           </div>
 
             <div className="filter">
@@ -61,11 +67,16 @@ const filteredRestaurants = listOfRestaurants.filter(
               > Top Rated Restaurants</button>
             </div>
         </div>
-        <div  className='res-container'>
+        <div  className='flex flex-wrap'>
          
           {
             filteredRes.map((restaurant)=>(
-              <RestaurantCard key={restaurant.info.id} resData={restaurant}/>
+              <Link
+              key={restaurant.info.id} 
+              to={"/restaurant/" + restaurant.info.id}>
+              <RestaurantCard resData={restaurant}/>
+              </Link>
+              
             ))
           }
           

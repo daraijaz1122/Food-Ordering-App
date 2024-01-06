@@ -13,15 +13,28 @@ const Body =()=>{
     fetchdata();
   },[])
 
-  const fetchdata = async()=>{
-    const data = await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=26.913903&lng=80.943945",
-    );
-    const json = await data.json();
-    const resData = json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
-    setlistOfRestaurants(resData)
-    setfilteredRes(resData)
-  }
+    const fetchdata = async () => {
+    try {
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.8943893&lng=81.0368211&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const json = await data.json();
+      for (let index = 0; index < json.data.cards.length; index++) {
+        const resData =
+          json?.data?.cards[index]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+
+        if (resData === undefined) {
+          continue;
+        }
+        setlistOfRestaurants(resData);
+        setfilteredRes(resData);
+        break;
+
+    }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  
+  };
 //search logic
 const handleSearch=()=>{
 const filteredRestaurants = listOfRestaurants.filter(

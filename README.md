@@ -7,6 +7,7 @@
 - Used Shimmer UI to render fake cards before the data is fetched and rendered (functionality provided by useEffect hook).
 - added a filter functionality to filter and display restaurants with ratings more than 4 stars(usestate hook).
 - added a search functionality to search for restaurants.
+- cloned repo
 
 # Parcel
 - Dev Build.

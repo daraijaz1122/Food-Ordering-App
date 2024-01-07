@@ -13,15 +13,29 @@ const Body =()=>{
     fetchdata();
   },[])
 
-  const fetchdata = async()=>{
-    const data = await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=26.913903&lng=80.943945",
-    );
-    const json = await data.json();
-    const resData = json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
-    setlistOfRestaurants(resData)
-    setfilteredRes(resData)
-  }
+  const fetchdata = async () => {
+    try {
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.8943893&lng=81.0368211&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const json = await data.json();
+      for (let index = 0; index < json.data.cards.length; index++) {
+        const resData =
+          json?.data?.cards[index]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+
+        if (resData === undefined) {
+          continue;
+        }
+        setlistOfRestaurants(resData);
+        setfilteredRes(resData);
+        break;
+
+    }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+
+  };
+
 //search logic
 const handleSearch=()=>{
 const filteredRestaurants = listOfRestaurants.filter(
@@ -44,30 +58,32 @@ const filteredRestaurants = listOfRestaurants.filter(
 
 
     return listOfRestaurants.length === 0 ?(<ShimmerUI/>): ( 
-         <div className=''>
-            <div className="search-container">
-              <div className='search'>
-              <button
-              onClick={handleSearch}
-              >Search</button>
+         <div className='bg-gray-100'>
+            <div className="search-container flex   px-4 py-4">
+              <div className='search mr-16 p-4'>
+
               <input 
-              className="input-box" 
+              className="border-black border-1 bg-gray-300 mr-4 py-2 px-4 rounded-lg shadow-lg" 
               type="text" placeholder="Search "
               value ={searchText}
               onChange={(e)=>{
                 SetSearchText(e.target.value);
               }}
               />
-          </div>
+              <button className="text-black border-black shadow-lg px-8 py-2 rounded-md bg-green-200"
+              onClick={handleSearch}
+              >Search</button>
+              
+             </div>
 
-            <div className="filter">
+            <div className="filter p-4">
               <button
-              className="filter-btn"
+              className="bg-green-50 py-2 px-6 rounded-lg shadow-lg"
             onClick={handleFilter}
               > Top Rated Restaurants</button>
             </div>
         </div>
-        <div  className='flex flex-wrap'>
+        <div  className='flex bg-green-200 grid-cols-6 gap-2 flex-wrap'>
          
           {
             filteredRes.map((restaurant)=>(

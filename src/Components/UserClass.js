@@ -33,12 +33,12 @@ class UserClass extends React.Component{
 
         
         return(
-            <div> 
-                 <div className="user-card">
-            <h2>Name:{name}</h2>
-            <h3>ID: {id}</h3>
-            <img src={avatar_url}/>
-            <h4>Contact : aijaz124</h4>
+            <div className=" items-center"> 
+                 <div className="">
+            <h2  className="font-semibold">Name:  {name}</h2>
+            <h3  className="font-semibold">ID:  {id}</h3>
+            <img className=" h-48 w-44 rounded " src={avatar_url}/>
+            <h4  className="font-semibold">Contact : aijaz124</h4>
            
         </div>
             </div>

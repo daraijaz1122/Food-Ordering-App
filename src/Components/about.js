@@ -19,16 +19,16 @@ class About extends React.Component{
         console.log("parent unmount")
     }
     render(){
-  console.log("parent render")
+ 
 
         return(
-            <div>
-                <h1>Welcome to about page </h1>
+            <div className=" bg-gray-200  grid justify-items-center p-4   ">
+                <h1 className="font-bold text-xl  capitalize">Welcome to about page </h1>
     
-                <h2>learn about the policies in detail</h2>
-                <h1>meet our Founder</h1>
+                <h2 className="font-semibold">learn about the policies in detail</h2>
+          
     
-               
+               <div className=""></div>
                 <UserClass name="First" location="kashmir"/>
                
             </div>

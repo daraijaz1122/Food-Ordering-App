@@ -16,7 +16,7 @@ const Header =()=>{
              <li className="px-2 font-bold"><Link to="/">Home</Link></li>
              <li className="px-2 font-bold"><Link to="/about">About Us</Link></li>
              <li className="px-2 font-bold"> <Link to="/contact">Contact</Link></li>
-              
+             <li className="px-2 font-bold"> <Link to="/grocery">Grocery</Link></li>
               <li className="px-2 font-bold">Cart</li>
               <li
              className="px-2 font-bold cursor-pointer"

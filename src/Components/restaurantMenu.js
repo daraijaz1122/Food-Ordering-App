@@ -7,15 +7,15 @@ const RestaurantMenu =()=>{
     const {resId} =useParams();
 
     const ResMenuList = useRestaurantMenu(resId)
+    console.log(ResMenuList)
 
      if(ResMenuList===null)return <ShimmerUI/>
      
-     const{
-    name,
+     const{name,
     cuisines,
-    costForTwoMessage}=ResMenuList?.cards[2]?.card?.card?.info;
+    costForTwoMessage}=ResMenuList?.cards[0]?.card?.card?.info;
 
-    const {itemCards}=ResMenuList?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    const {itemCards}=ResMenuList?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
     
    
 

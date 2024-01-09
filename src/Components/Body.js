@@ -4,6 +4,7 @@ import {useState,useEffect} from 'react';
 import ShimmerUI from "./ShimmerUI";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { CONSTANTS } from "../utils/Constants";
 const Body =()=>{
   const [listOfRestaurants,setlistOfRestaurants] = useState([])
   const [searchText , SetSearchText] = useState("");
@@ -15,7 +16,7 @@ const Body =()=>{
 
   const fetchdata = async () => {
     try {
-      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.8943893&lng=81.0368211&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const data = await fetch(CONSTANTS.RESTAURANT_URL);
       const json = await data.json();
       for (let index = 0; index < json.data.cards.length; index++) {
         const resData =
@@ -83,7 +84,7 @@ const filteredRestaurants = listOfRestaurants.filter(
               > Top Rated Restaurants</button>
             </div>
         </div>
-        <div  className='flex bg-green-200 grid-cols-6 gap-2 flex-wrap'>
+        <div  className='flex bg-gray-1\]= 00 grid-cols-6 gap-2 flex-wrap'>
          
           {
             filteredRes.map((restaurant)=>(

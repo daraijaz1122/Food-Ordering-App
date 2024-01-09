@@ -8,6 +8,7 @@ const RestaurantCard =(props)=>{
       cuisines,
       avgRating,
       deliveryTime}=resData?.info;
+      console.log(resData?.info)
       
   return(
     <div className='w-52 h-auto bg-gray-300 m-4 p-2 shadow-xl rounded-lg'>

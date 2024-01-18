@@ -28,3 +28,10 @@
 - Tree shaking Algorithm(removes unused code)
 - Different production and Development builds.
 
+# Redux Toolkit
+- install @reduxjs/toolkit and react-redux
+- build store
+- connect our store to our app
+- slice (cartSlice)
+- dispatch (action)
+- selector

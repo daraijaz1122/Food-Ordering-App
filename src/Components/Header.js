@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import  LOGO  from "../Assets/logo.jpg";
+import { useSelector } from "react-redux";
 const Header =()=>{
   const [btnNameReact , setBtnNameReact] = useState("Login")
    const Status = useOnlineStatus();
+
+//subscribing to the store using a selector 
+   const cartItems = useSelector((store)=> store.cart.items);
+   console.log(cartItems)
   return(
       <div className='flex bg-pink-200 shadow-md justify-between'>
             <div className='image'>
@@ -17,7 +22,7 @@ const Header =()=>{
              <li className="px-2 font-bold"><Link to="/about">About Us</Link></li>
              <li className="px-2 font-bold"> <Link to="/contact">Contact</Link></li>
              <li className="px-2 font-bold"> <Link to="/grocery">Grocery</Link></li>
-              <li className="px-2 font-bold">Cart</li>
+              <li className="px-2 font-bold"><Link to="/cart"> Cart({cartItems.length}items)</Link></li>
               <li
              className="px-2 font-bold cursor-pointer"
               onClick={()=>{
